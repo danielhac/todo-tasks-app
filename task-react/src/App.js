@@ -5,7 +5,7 @@ import { Logout } from './components/logout/logout.component'
 import { TaskList } from './components/task-list/task-list.component'
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import './App.css';
-
+const secret = require('./secret')
 
 
 class App extends Component {
@@ -63,9 +63,9 @@ class App extends Component {
 
   handleCreateUserSubmit = (e) => {
     e.preventDefault()
-    // console.log("email found: " + this.state.email);
-    // console.log("password found: " + this.state.password);
-    // console.log("username found: " + this.state.username);
+    console.log("email found: " + this.state.email);
+    console.log("password found: " + this.state.password);
+    console.log("username found: " + this.state.username);
 
     const credentials =  JSON.stringify({
       "email": this.state.email,
@@ -92,10 +92,14 @@ class App extends Component {
     // console.log("email found: " + this.state.email);
     // console.log("password found: " + this.state.password);
 
+    // For prod use
     const credentials =  JSON.stringify({
       "email": this.state.email,
       "password": this.state.password
     })
+
+    // For quick local use
+    // const credentials = secret
 
 
     // TODO: handle when credentials are incorrect
@@ -156,7 +160,7 @@ class App extends Component {
 
   handleTaskAdd = (e) => {
     if(e) e.preventDefault()
-    // console.log('handleTaskAdd', this.state.newtask);
+    console.log('handleTaskAdd', this.state.newtask);
 
     const body = JSON.stringify({
       'description': this.state.newtask
@@ -209,7 +213,7 @@ class App extends Component {
       },
       body: body
     })
-    .then(response => console.log(response.json()))
+    .then(response => console.log(response))
     .catch(err => console.error(err))
   }
 

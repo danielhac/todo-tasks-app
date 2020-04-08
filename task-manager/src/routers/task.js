@@ -141,8 +141,8 @@ router.patch('/tasks/:id', auth, async (req, res) => {
 
         // Replaced below with above block for middleware compatibility for future
         // const task = await Task.findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true})
-        
-        res.send(task)
+
+        res.status(201).send(task)
     } catch (error) {
         console.log(error);
         res.status(400).send(error)

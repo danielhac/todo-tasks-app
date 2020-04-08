@@ -7,7 +7,10 @@ export const CreateUser = ({handleCreateUserSubmit, userChange, emailChange, pas
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
-    
+    const handleCreateAndClose = () => {
+        
+    }
+
     return (
         <div>
             <Button variant="primary" onClick={handleShow}>Create Account</Button>
@@ -42,11 +45,11 @@ export const CreateUser = ({handleCreateUserSubmit, userChange, emailChange, pas
                                 onChange={passChange}
                             />
                         </Form.Group>
+                <Modal.Footer>
+                    <Button type='submit' value='Submit' variant="success" block >Create Account</Button>
+                </Modal.Footer>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button type='submit' value='Submit' variant="success" block onClick={handleClose}>Create Account</Button>
-                </Modal.Footer>
                 
 
             </Modal>

@@ -59,7 +59,10 @@ app.get('/', async (req, res) => {
 // USERS - CREATE
 app.post('/users', async (req, res) => {
     let creds = req.headers.credentials
-    // creds = JSON.parse(creds)
+    // let test = JSON.parse(creds)
+    console.log(creds);
+
+
     // console.log(creds.email)
     // console.log(creds.password);
     // console.log(creds.name);
@@ -355,7 +358,20 @@ app.patch('/tasks/:id', async (req, res) => {
         body: body
     }
 
-    const req2 = http.request(options)
+    const req2 = http.request(options, (response) => {
+        response.setEncoding('utf8');
+
+        let data = ''
+        response.on('data', (chunk) => {
+            data += chunk.toString()
+        })
+        
+        response.on('end', () => {
+            // const allChunks = JSON.parse(data)
+            console.log('patch done');
+            res.status(201).send()
+        })
+    })
 
     req2.on('error', (e) => {
         console.error(e)
