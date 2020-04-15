@@ -30,9 +30,12 @@ form.login {
   padding: 0;
 }
 
+.login-error {
+  padding-top: 10px;
+}
+
 @media (min-width: 992px) {
   .col-lg-1 {
     max-width: 6.333333%!important;
   }
-
 }
