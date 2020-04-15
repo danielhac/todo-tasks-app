@@ -1,9 +1,14 @@
+/*
+*   This component dislays the user's name, e-mail and password input fields.
+*/
+
 import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Alert from 'react-bootstrap/Alert'
 
-export const CreateUser = ({handleCreateUserSubmit, userChange, emailChange, passChange}) => {
+export const CreateUser = ({handleCreateUserSubmit, userChange, emailChange, passChange, checkCreateError}) => {
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
@@ -45,6 +50,7 @@ export const CreateUser = ({handleCreateUserSubmit, userChange, emailChange, pas
                                 onChange={passChange}
                             />
                         </Form.Group>
+                        {checkCreateError && <Alert variant='danger'>{checkCreateError}</Alert>}
                 <Modal.Footer>
                     <Button type='submit' value='Submit' variant="success" block >Create Account</Button>
                 </Modal.Footer>
@@ -54,26 +60,5 @@ export const CreateUser = ({handleCreateUserSubmit, userChange, emailChange, pas
 
             </Modal>
         </div>
-        // <form className='create-user' onSubmit={handleCreateUserSubmit}>
-        //     <input
-        //         className='user-name'
-        //         type='text'
-        //         placeholder='Name'
-        //         onChange={userChange}
-        //     />
-        //     <input
-        //         className='user-email'
-        //         type='text'
-        //         placeholder='E-mail'
-        //         onChange={emailChange}
-        //     />
-        //     <input
-        //         className='user-password'
-        //         type='password'
-        //         placeholder='Password'
-        //         onChange={passChange}
-        //     />
-        //     <input type='submit' value='Submit' variant="outline-primary"/>
-        // </form>
     )
 }
