@@ -1,6 +1,9 @@
+/*
+*   This component dislays the individual tasks.
+*/
+
 import React from 'react'
 import Button from 'react-bootstrap/Button'
-
 
 function Check(props) {
     if(props.completed == true) {
