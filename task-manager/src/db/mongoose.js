@@ -1,3 +1,7 @@
+/*
+*   The connection to MongoDB.
+*/
+
 const mongoose = require('mongoose')
 const secret = require('./secret')
 
