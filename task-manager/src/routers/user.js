@@ -37,12 +37,12 @@ router.post('/users/login', async (req, res) => {
         res.cookie('token', token, { expires: new Date(Date.now() + 900000), httpOnly: true })
         // console.log(res);
         // req.setHeader('foo', 'bar')
-        res.send({ user, token })
+        res.status(200).send({ user, token })
         // res.send({ token })
         res.end()
     } catch (error) {
         console.log(error);
-        res.status(400).send(error)
+        res.status(401).send(error)
     }
 })
 
