@@ -1,3 +1,8 @@
+/*  
+*   A to-do task list REST API server-side application built with Node.js, Express and MongoDB / Mongoose.
+*     - Uses two routers: user, task
+*/
+
 const express = require('express')
 const cors = require('cors')                // https://expressjs.com/en/resources/middleware/cors.html
 require('./db/mongoose')
