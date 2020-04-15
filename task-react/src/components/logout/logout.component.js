@@ -1,3 +1,7 @@
+/*
+*   This component dislays the logout button.
+*/
+
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 
