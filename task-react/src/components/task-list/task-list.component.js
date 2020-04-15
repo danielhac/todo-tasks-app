@@ -1,3 +1,7 @@
+/*
+*   This component dislays the main structure for tasks.
+*/
+
 import React from 'react'
 import { Task } from '../task/task.component'
 import { AddTask } from '../add-task/add-task.component';
