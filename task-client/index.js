@@ -6,8 +6,20 @@ const path = require('path')
 
 
 const app = express()
-app.use(cors())
+// app.use(cors())
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+    next();
+});
 const port = process.env.PORT || 3001
+
+const hostname = 'taskappmgr-env.eba-tdqrarch.us-west-2.elasticbeanstalk.com'
+const portTaskMgr = ''
+
+// const hostname = 'localhost'
+// const portTaskMgr = '3002'
+
 
 /* Client-side of the Task Node.js application.
 *   Using the Node.js built in http/https to make requests to the server-side API
@@ -30,8 +42,8 @@ app.get('/', async (req, res) => {
     
     let data = ''
     const options = {
-        hostname: 'localhost',
-        port: '3002',
+        hostname: hostname,
+        port: portTaskMgr,
         path: '/tasksAll',
         method: 'GET',
         headers: {}
@@ -44,7 +56,7 @@ app.get('/', async (req, res) => {
 
         response.on('end', () => {
             const allChunks = JSON.parse(data)
-            // console.log(allChunks);
+            console.log(allChunks);
             res.send(allChunks)
         })
     })
@@ -68,8 +80,8 @@ app.post('/users', async (req, res) => {
     // console.log(creds.name);
 
     const options = {
-        hostname: 'localhost',
-        port: '3002',
+        hostname: hostname,
+        port: portTaskMgr,
         path: '/users',
         method: 'POST',
         headers: {
@@ -125,8 +137,8 @@ app.post('/login', async (req, res) => {
     });
 
     const options = {
-        hostname: 'localhost',
-        port: '3002',
+        hostname: hostname,
+        port: portTaskMgr,
         path: '/users/login',
         method: 'POST',
         headers: {
@@ -208,8 +220,8 @@ app.post('/logout', async (req, res) => {
     // console.log(req.cookies);
 
     const options = {
-        hostname: 'localhost',
-        port: '3002',
+        hostname: hostname,
+        port: portTaskMgr,
         path: '/users/logout',
         method: 'POST',
         headers: {
@@ -247,8 +259,8 @@ app.post('/tasks', async (req, res) => {
     })
     
     const options = {
-        hostname: 'localhost',
-        port: '3002',
+        hostname: hostname,
+        port: portTaskMgr,
         path: '/tasks/',
         method: 'POST',
         headers: {
@@ -288,28 +300,32 @@ app.post('/tasks', async (req, res) => {
 
 // TASKS - GET
 app.get('/tasks', async (req, res) => {
-    console.log('token: ' + req.header('Authorization'));
+    console.log('get tasks, token: ' + req.header('Authorization'));
 
     const options = {
-        hostname: 'localhost',
-        port: '3002',
+        // hostname: hostname,
+        hostname: 'taskappmgr-env.eba-tdqrarch.us-west-2.elasticbeanstalk.com',
+        port: portTaskMgr,
         path: '/tasks',
         method: 'GET',
         headers: {
+            'Access-Control-Allow-Origin':'*',
             'Content-Type': 'application/text',
             'Content-Length': Buffer.byteLength(req.header('Authorization')),
             'Authorization': req.header('Authorization')
           }
     }
 
+    console.log('task client, before req2');
     const req2 = http.request(options, (response) => {    
         // console.log(`STATUS: ${response.statusCode}`);
         // console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
         response.setEncoding('utf8');
-
+        console.log('task client, contacting task server');
         let data = ''
         response.on('data', (chunk) => {
             data += chunk.toString()
+            console.log(data);
         })
 
         response.on('end', () => {
@@ -320,6 +336,7 @@ app.get('/tasks', async (req, res) => {
 
     req2.on('error', (e) => {
         console.error(e)
+        res.send(e)
     })
 
     req2.end()
@@ -346,8 +363,8 @@ app.patch('/tasks/:id', async (req, res) => {
     }
 
     const options = {
-        hostname: 'localhost',
-        port: '3002',
+        hostname: hostname,
+        port: portTaskMgr,
         path: '/tasks/'+req.params.id,
         method: 'PATCH',
         headers: {
@@ -387,8 +404,8 @@ app.patch('/tasks/:id', async (req, res) => {
 app.delete('/tasks/:id', async (req, res) => {
     console.log('in delete', req.params.id);
     const options = {
-        hostname: 'localhost',
-        port: '3002',
+        hostname: hostname,
+        port: portTaskMgr,
         path: '/tasks/'+req.params.id,
         method: 'DELETE',
         headers: {
