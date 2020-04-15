@@ -1,5 +1,5 @@
 # Todo Tasks App
-This is a To-do list RESTful Web Application with user authentication built with Node.js, Express, React, MongoDB, Mongoose deployed to AWS.
+This is a To-do list RESTful Web Application with user authentication built with Node.js, Express, React, MongoDB, Mongoose and deployed to AWS.
 
 ## Used Technologies
 
